@@ -1,19 +1,36 @@
 import java.util.*;
 
 public class LCM {
-//    private static long lcm_naive(int a, int b) {
-//        for (long l = 1; l <= (long) a * b; ++l)
-//            if (l % a == 0 && l % b == 0)
-//                return l;
-//
-//        return (long) a * b;
-//    }
 
     private static long lcm(int a, int b) {
-        return a * b / gcd(a, b);
+//        long result = 1;
+//        int bigOne = Math.max(a, b);
+//        for (int i = 2; i <= bigOne; i++) {
+//            int countOne = 0;
+//            while (a % i == 0) {
+//                a = a / i;
+//                countOne++;
+//            }
+//            int countTwo = 0;
+//            while (b % i == 0) {
+//                b = b / i;
+//                countTwo++;
+//            }
+//            if (countOne != 0 || countTwo != 0) {
+//                result = result * (long) Math.pow(i, Math.max(countOne, countTwo));
+//            }
+//        }
+//        return result;
+
+        int bigOne = Math.max(a, b);
+        int smallOne = Math.min(a, b);
+
+        long gcd = gcd(bigOne, smallOne);
+
+        return (a / gcd) * b;
     }
 
-    private static int gcd(int big, int small) {
+    private static long gcd(int big, int small) {
         if (small == 0) {
             return big;
         }
@@ -25,7 +42,6 @@ public class LCM {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
         int b = scanner.nextInt();
-
         System.out.println(lcm(a, b));
     }
 }
