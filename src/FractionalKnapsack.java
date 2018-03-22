@@ -10,13 +10,13 @@ public class FractionalKnapsack {
         double value = 0;
 
         int n = values.length;
-        int itemCount = values.length;
+        int itemLeft = values.length;
 
-        while (capacity > 0 & itemCount > 0) {
+        while (capacity > 0 & itemLeft > 0) {
             double maxValuePerWeight = 0;
             int maxValuePerWeightIndex = 0;
             for (int i = 0; i < n; i++) {
-                if (values[i] != 0 & weights[i] != 0 && values[i] / weights[i] > maxValuePerWeight) {
+                if (values[i] != 0 && weights[i] != 0 && (double) values[i] / (double) weights[i] > maxValuePerWeight) {
                     maxValuePerWeight = (double) values[i] / (double) weights[i];
                     maxValuePerWeightIndex = i;
                 }
@@ -27,7 +27,7 @@ public class FractionalKnapsack {
             value = value + weight * maxValuePerWeight;
             values[maxValuePerWeightIndex] = 0;
             weights[maxValuePerWeightIndex] = 0;
-            itemCount--;
+            itemLeft--;
         }
 
         return value;
