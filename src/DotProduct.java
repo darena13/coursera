@@ -6,11 +6,7 @@ import java.util.*;
 
 public class DotProduct {
     private static long maxDotProduct(int[] a, int[] b) {
-        int n = a.length;
         long result = 0;
-//        for (int i = 0; i < a.length; i++) {
-//            result += a[i] * b[i];
-//        }
 
         List<Integer> arrA = new ArrayList<>();
         for (int i = 0; i < a.length; i++) {
@@ -22,37 +18,44 @@ public class DotProduct {
             arrB.add(i, b[i]);
         }
 
-//        Collections.sort(arrA);
-//        Collections.sort(arrB);
+        for (int j = 0; j < a.length; j++) {
+            int maxA = arrA.get(0);
+            int maxAIndex = 0;
 
-        int maxA = arrA.get(arrA.size());
-        int maxB = arrB.get(arrB.size());
-        int minB = arrB.get(0);
+            int maxB = arrB.get(0);
+            int maxBIndex = 0;
 
-        for (int i = 0; i < n; i++) {
-            if (arrA.get(i) > maxA) {
-                maxA = arrA.get(i);
-            }
-        }
+            int minB = arrB.get(0);
+            int minBIndex = 0;
 
-        if (maxA > 0) {
-            for (int i = 0; i < n; i++) {
-                if (arrB.get(i) > maxB) {
-                    maxB = arrB.get(i);
+            for (int i = 0; i < arrA.size(); i++) {
+                if (Math.abs(arrA.get(i)) > Math.abs(maxA)) {
+                    maxA = arrA.get(i);
+                    maxAIndex = i;
                 }
             }
-            result = result + maxA * maxB;
-            arrA.remove(maxA);
-            arrB.remove(maxB);
-        } else if (maxA < 0){
-            for (int i = 0; i < n; i++) {
-                if (arrB.get(i) < minB) {
-                    minB = arrB.get(i);
+
+            if (maxA > 0) {
+                for (int i = 0; i < arrB.size(); i++) {
+                    if (arrB.get(i) > maxB) {
+                        maxB = arrB.get(i);
+                        maxBIndex = i;
+                    }
                 }
+                result = result + maxA * maxB;
+                arrA.remove(maxAIndex);
+                arrB.remove(maxBIndex);
+            } else if (maxA <= 0) {
+                for (int i = 0; i < arrB.size(); i++) {
+                    if (arrB.get(i) < minB) {
+                        minB = arrB.get(i);
+                        minBIndex = i;
+                    }
+                }
+                result = result + maxA * minB;
+                arrA.remove(maxAIndex);
+                arrB.remove(minBIndex);
             }
-            result = result + maxA * minB;
-            arrA.remove(maxA);
-            arrB.remove(minB);
         }
 
         return result;
