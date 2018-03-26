@@ -18,45 +18,52 @@ public class DotProduct {
             arrB.add(i, b[i]);
         }
 
-        for (int j = 0; j < a.length; j++) {
-            int maxA = arrA.get(0);
-            int maxAIndex = 0;
+        Collections.sort(arrA);
+        Collections.sort(arrB);
 
-            int maxB = arrB.get(0);
-            int maxBIndex = 0;
-
-            int minB = arrB.get(0);
-            int minBIndex = 0;
-
-            for (int i = 0; i < arrA.size(); i++) {
-                if (Math.abs(arrA.get(i)) > Math.abs(maxA)) {
-                    maxA = arrA.get(i);
-                    maxAIndex = i;
-                }
-            }
-
-            if (maxA > 0) {
-                for (int i = 0; i < arrB.size(); i++) {
-                    if (arrB.get(i) > maxB) {
-                        maxB = arrB.get(i);
-                        maxBIndex = i;
-                    }
-                }
-                result = result + maxA * maxB;
-                arrA.remove(maxAIndex);
-                arrB.remove(maxBIndex);
-            } else if (maxA <= 0) {
-                for (int i = 0; i < arrB.size(); i++) {
-                    if (arrB.get(i) < minB) {
-                        minB = arrB.get(i);
-                        minBIndex = i;
-                    }
-                }
-                result = result + maxA * minB;
-                arrA.remove(maxAIndex);
-                arrB.remove(minBIndex);
-            }
+        for (int i = 0; i < a.length; i++) {
+            result = result + (long) arrA.get(i) * (long) arrB.get(i);
         }
+
+//        for (int j = 0; j < a.length; j++) {
+//            int maxA = arrA.get(0);
+//            int maxAIndex = 0;
+//
+//            int maxB = arrB.get(0);
+//            int maxBIndex = 0;
+//
+//            int minB = arrB.get(0);
+//            int minBIndex = 0;
+//
+//            for (int i = 0; i < arrA.size(); i++) {
+//                if (Math.abs(arrA.get(i)) > Math.abs(maxA)) {
+//                    maxA = arrA.get(i);
+//                    maxAIndex = i;
+//                }
+//            }
+//
+//            if (maxA > 0) {
+//                for (int i = 0; i < arrB.size(); i++) {
+//                    if (arrB.get(i) > maxB) {
+//                        maxB = arrB.get(i);
+//                        maxBIndex = i;
+//                    }
+//                }
+//                result = result + maxA * maxB;
+//                arrA.remove(maxAIndex);
+//                arrB.remove(maxBIndex);
+//            } else if (maxA <= 0) {
+//                for (int i = 0; i < arrB.size(); i++) {
+//                    if (arrB.get(i) < minB) {
+//                        minB = arrB.get(i);
+//                        minBIndex = i;
+//                    }
+//                }
+//                result = result + maxA * minB;
+//                arrA.remove(maxAIndex);
+//                arrB.remove(minBIndex);
+//            }
+//        }
 
         return result;
     }
