@@ -10,7 +10,7 @@ public class LargestNumber {
         String result = "";
 
         List<String> strArr = new ArrayList<>(Arrays.asList(a));
-//
+
 //        Collections.sort(strArr, Collections.reverseOrder());
 
         int longestNumberLength = 0;
@@ -22,6 +22,11 @@ public class LargestNumber {
 
         int nDigit = 0;
         int maxNDigit = 0;
+        int maxFirstDigit = 0;
+        int maxSecondDigit = 0;
+        int maxThirdDigit = 0;
+        int maxFourthDigit = 0;
+        int maxFifthDigit = 0;
         for (int i = 0; i < strArr.size(); i++) {
             if (strArr.get(i).length() >= nDigit + 1 && (strArr.get(i).charAt(nDigit) - '0') > maxNDigit) {
                 maxNDigit = strArr.get(i).charAt(nDigit) - '0';
@@ -35,7 +40,6 @@ public class LargestNumber {
                 maxNDigitNumbers.add(strArr.get(i));
             }
         }
-
 
 
 //        for (String s : maxNDigitNumbers) {
