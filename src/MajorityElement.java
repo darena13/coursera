@@ -7,31 +7,39 @@ import java.io.*;
 
 public class MajorityElement {
     private static int getMajorityElement(int[] a, int left, int right) {
+        //пустой массив
         if (left == right) {
             return -1;
         }
+        //массив из одного элемента
         if (left + 1 == right) {
             return a[left];
         }
-
-        int pivot = (right - left) / 2;
-        while (left <= right) {
-            while (a[left] < a[pivot]) {
-                left++;
+        //массив из двух
+        if (left + 2 == right) {
+            if (a[left] == a[right - 1]) {
+                return a[left];
+            } else {
+                return -1;
             }
-            while (a[right] >= a[pivot]) {
-                right--;
-            }
-            int tmp = a[left];
-            a[left] = a[right];
-            a[right] = tmp;
         }
-        int mid = left;
+        //массив из трех и более
+        int mid = (right - left) / 2;
 
-        //write your code here
+        int rightMajor = getMajorityElement(a, mid, right);
+
+        if (rightMajor != -1) {
+            return rightMajor;
+        }
+
+        int leftMajor = getMajorityElement(a, left, mid);
+
+        if (leftMajor != -1) {
+            return leftMajor;
+        }
+
         return -1;
     }
-
 
     public static void main(String[] args) {
         FastScanner scanner = new FastScanner(System.in);
